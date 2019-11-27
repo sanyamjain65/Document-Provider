@@ -18,16 +18,18 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 /** DocumentProviderPlugin */
 public class DocumentProviderPlugin implements MethodCallHandler {
   /** Plugin registration. */
-  Activity context;
+//  Activity context;
   MethodChannel methodChannel;
+  Context context;
 
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "document_provider");
-    channel.setMethodCallHandler(new DocumentProviderPlugin(registrar.activity(), channel));
+    channel.setMethodCallHandler(new DocumentProviderPlugin(registrar.activity(), registrar.context() ,channel));
   }
 
-  public DocumentProviderPlugin(Activity activity, MethodChannel methodChannel) {
-    this.context = activity;
+  public DocumentProviderPlugin(Activity activity, Context context, MethodChannel methodChannel) {
+//    this.context = activity;
+    this.context = context;
     this.methodChannel = methodChannel;
     this.methodChannel.setMethodCallHandler(this);
   }
